@@ -1,0 +1,48 @@
+{
+  "debug": false,
+  "URL_ROOT": "https://collectionsbmu.ville-ge.ch/alswww2.dll/APS_ZONES?fn=QuickSearch&Style=Portal3",
+  "googlebooks":{
+    "url":"https://www.googleapis.com/books/v1/volumes",
+    "params":{
+      "q":"_SEARCH_+inauthor:_AUTHOR_",
+      "key":"_YOURS_"
+    }
+  },
+  "collection":{
+    "search":"https://collectionsbmu.ville-ge.ch/alswww2.dll/APS_ZONES",
+    "next":"https://collectionsbmu.ville-ge.ch/alswww2.dll/",
+    "romand":{
+      "query":"( (bl=JRO or bl=ARO) and (StockMaterialTypeCode=LBR or StockMaterialTypeCode=LCA or StockMaterialTypeCode=LIV) )",
+      "template":{
+        "next":"a.pageNavLink:contains(>)",
+        "down":"h1.titleText1",
+        "list":"table.browseList>tbody>tr",
+        "error":"#ErrorAdvice font",
+        "image":"td>a>div>img",
+        "title":"a.SummaryFieldLink",
+        "details":{"label":"td.SummaryFieldLegend","value":"td.SummaryFieldData"},
+        "year":"td.SummaryFieldData",
+        "lang":"td.SummaryFieldData"
+      }
+    },
+    "bd":{
+      "query":"( StockMaterialTypeCode=LBD )",
+      "template":{
+        "next":"a.pageNavLink:contains(>)",
+        "down":"h1.titleText1",
+        "list":"table.browseList>tbody>tr",
+        "error":"#ErrorAdvice font",
+        "image":"td>a>div>img",
+        "title":"a.SummaryFieldLink",
+        "details":{"label":"td.SummaryFieldLegend","value":"td.SummaryFieldData"},
+        "year":"td.SummaryFieldData",
+        "lang":"td.SummaryFieldData"
+      }
+    }
+  },
+  "element":{
+    "query":"https://collectionsbmu.ville-ge.ch/alswww2.dll/APS_PRESENT_BIB?Style=Portal3&SubStyle=&Lang=FRE&ResponseEncoding=utf-8&no=_DOCUMENT_ID_&Via=Z3950&View=Annotated?Style=Portal3&SubStyle=&Lang=FRE&ResponseEncoding=utf-8"
+  }
+
+  
+}

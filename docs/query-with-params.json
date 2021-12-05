@@ -1,0 +1,23 @@
+{
+  "searchType": "all",
+  "sf": "* NOT (TypeOfDocumentFacet:Event AND (start_date:[* TO NOW] OR end_date:[* TO NOW]))",
+  "queryid": "NONE",
+  "advancedQuery": {
+    "searchContext": "advancedsearch",
+    "terms": [],
+    "limitClause": "LocalisationLimit_s:\"Cite\" contentLimit_s:\"BookBD\"",
+    "searchType": "all",
+    "pageSize": 10,
+    "sort": "score | SortkeyYOPD_DESC",
+    "itemCoverage": null,
+    "dcDateRange": null,
+    "section": "* NOT (TypeOfDocumentFacet:Event AND (start_date:[* TO NOW] OR end_date:[* TO NOW]))"
+  },
+  "fl": "id",
+  "order": "score | SortkeyYOPD_DESC",
+  "pageNo": 1,
+  "pageSize": 1,
+  "locale": "fr",
+  "includeFacets": false
+}
+

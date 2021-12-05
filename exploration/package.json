@@ -1,0 +1,32 @@
+{
+  "name": "bmu-ge",
+  "version": "1.0.0",
+  "description": "simple bmu wrapper",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.2",
+    "lowdb": "^1.0.0",
+    "md5": "^2.2.1",
+    "moment": "^2.21.0",
+    "nedb": "^1.8.0",
+    "nodemailer": "^6.3.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "request-promise-native": "^1.0.5",
+    "solr-client": "^0.10.0-rc8"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.0.0"
+  },
+  "author": "Olivier Evalet <evaleto@gmail.com> (http://evaletolab.ch/)",
+  "license": "ISC"
+}

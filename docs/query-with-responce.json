@@ -1,0 +1,17 @@
+{
+  "queryid": "f4b6cf84-b10a-47c8-8dbf-e513911a5d35",
+  "advancedQuery": {
+    "limitClause": "LocalisationLimit_s:\"Cite\" contentLimit_s:\"BookBD\"",
+    "pageSize": 10,
+    "searchContext": "advancedsearch",
+    "searchType": "all",
+    "section": "* NOT (TypeOfDocumentFacet:Event AND (start_date:[* TO NOW] OR end_date:[* TO NOW]))",
+    "sort": "score",
+    "terms": []
+  },
+  "includeFacets": true,
+  "sf": "* NOT (TypeOfDocumentFacet:Event AND (start_date:[* TO NOW] OR end_date:[* TO NOW]))",
+  "order": "score",
+  "pageSize": 8,
+  "locale": "fr"
+}
