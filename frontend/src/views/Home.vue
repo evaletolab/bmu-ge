@@ -102,7 +102,7 @@ export default class Home extends Vue {
   showVideoDrawer = false;
 
   //
-  // html pages
+  // html pages -
   content:any = {}
   books: any[]|undefined = [];
 
