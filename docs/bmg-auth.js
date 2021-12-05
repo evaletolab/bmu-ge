@@ -17,18 +17,18 @@ Cookie: warning6c50ebd8d68346a0a801a3edf3c44770=agreed; remember=true; user=E309
 
 ## post:
 {
-  "username": "E309603738",
-  "password": "1G_ploiuz",
+  "username": "",
+  "password": "",
   "birthdate": "",
   "locale": "fr"
 }
 
 ## Response:
 {
-  "defaultBasketId": "basket:E30 960 373 8:default:",
+  "defaultBasketId": "basket:",
   "ilsUser": true,
   "login": "E309603738",
   "omnidexid": "E30 960 373 8",
-  "token": "a91ae45e-4180-4aab-b9d9-bbe51a406c97",
-  "userid": "E30 960 373 8"
+  "token": "",
+  "userid": ""
 }
