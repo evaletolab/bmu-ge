@@ -39,7 +39,7 @@
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">Facebook</p> 
             <div class="ui-icon vcenter small align-right">
-              <img src="icons/social_facebook.svg" alt="">
+              <img src="/icons/social_facebook.svg" alt="">
             </div>
           </div>
         </a>
@@ -48,7 +48,7 @@
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">Instagram</p> 
             <div class="ui-icon vcenter small align-right">
-              <img src="icons/social_instagram.svg" alt="">
+              <img src="/icons/social_instagram.svg" alt="">
             </div>
           </div>
         </a>
@@ -57,7 +57,7 @@
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">Twitter</p> 
             <div class="ui-icon vcenter small align-right">
-              <img src="icons/social_vimeo.svg" alt="">
+              <img src="/icons/social_vimeo.svg" alt="">
             </div>
           </div>
         </a>

@@ -70,20 +70,20 @@
 
     <PageSlide title="Plus d'information" :open="openPage" @onClose="openPage = false" >
       <div class="page-header">
-          <a href="#" v-for="(category) in categories"  :key="category" @click="onCategory(category)">
-            <div class="ui-button height3 width8 menu"> 
-              <p class="vcenter">{{category}}</p> 
+          <router-link :to="'/home/'+category.slug" v-for="(category) in categories"  :key="category.slug" >
+            <div class="ui-button height3 width8 menu" :class="{'active':(currentSlug == category.slug)}"> 
+              <p class="vcenter">{{category.name}}</p> 
               <div class="ui-icon vcenter align-right">
-                <img src="icons/dot.svg" alt="">
+                <img src="/icons/dot.svg" alt="">
               </div>
             </div>
-          </a>
+          </router-link>
 
         <a href="https://www.twitter.com">
           <div class="ui-button height3 width8 menu"> 
             <p class="vcenter">Favoris</p> 
             <div class="ui-icon vcenter align-right">
-              <img src="icons/dot.svg" alt="">
+              <img src="/icons/dot.svg" alt="">
             </div>
           </div>
         </a>
@@ -109,7 +109,7 @@
 
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import Drawer from '../components/Drawer.vue';
 import PageSlide from '../components/PageSlide.vue';
 import VerticalDrawer from '../components/VerticalDrawer.vue';
@@ -134,14 +134,16 @@ export default class Home extends Vue {
   books: any[]|undefined = [];
   title = "bande dessinée";
 
-  categories:string[] = [];
+  categories:any[] = [];
+  currentSlug = 'bd';
+
 
   async mounted() {
     this.drawer = this.$refs.drawer as Drawer;
     console.log('-----DEBUG',$config.config)
     this.content = $config.config.content || '';
 
-    this.categories = Object.keys($config.config.queries);
+    this.categories = $config.config.category;
 
     try{
       const uid = $config.getDeviceID();
@@ -154,20 +156,28 @@ export default class Home extends Vue {
 
   }
 
+
   onClose() {
   }
 
-  async onCategory(name) {
+  async onCategory(slug) {
     try{
       this.openPage = false;
-      this.books = await $bmu.queryNews(name);
-      this.title = name;
+      this.books = await $bmu.queryNews(slug);
+      this.title = this.categories.find(cat => cat.slug === slug).name;
 
     }catch(err) {
       console.log("reports error:", err);
     }
 
   }
+
+   @Watch('$route', { immediate: true, deep: true })
+   async onUrlChange(value: any) {
+     this.currentSlug = (value.params.slug)?value.params.slug:'bd';
+
+     await this.onCategory(this.currentSlug);
+    }  
 
 }
 </script>
@@ -197,7 +207,7 @@ export default class Home extends Vue {
       position: absolute;
       top: 5px;
       right: 5px;
-      color: hotpink;
+      color: gray;
     }
 
     .text{
@@ -223,6 +233,11 @@ export default class Home extends Vue {
         font-size: 80%;
       }
     }
+  }
+
+  a .active {
+    color: var(--ui-hover-text-color);
+    background: var(--main-font-color);
   }
 
   .video-thumbnail{
