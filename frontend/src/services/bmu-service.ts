@@ -96,7 +96,6 @@ class BMUService {
             console.log('---- hits',solr.numHits);
             console.log('---- page',solr.pageNo);
             if(solr.numHits > 0) {
-                console.log('---- content',resultSet.length);
                 // console.log('---- content',JSON.stringify(resultSet[0],0,2));
                 for (let index in resultSet) {
                     const img = resultSet[index].imageSource_256 || resultSet[index].imageSource_128;

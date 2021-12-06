@@ -22,14 +22,16 @@
       <div class="title">Nouveautés BD</div>
 
         <div class="render-area shade">
-          <ul>
-            <li v-for="(book) in books"  :key="book.localNumber">
-              {{book.title}} - 
-              {{book.localNumber}}
-              <img class="img-small" :src="book.image" />
-            </li>
-          </ul>
-
+          <div class="grid-container grid-container--fit">
+            <div class="grid-element content" v-for="(book) in books"  :key="book.localNumber">
+              <img class="" :src="book.image" />
+              <div class="text">
+                <div>{{book.title}}</div>
+                <div class="sku">{{book.localNumber}}</div>
+                <div class="author">{{book.creator}}</div>
+              </div>
+            </div>
+          </div>
         </div>
 
 
@@ -130,6 +132,45 @@ export default class Home extends Vue {
 }
 </script>
 <style scoped lang="scss">
+
+  .content{
+    .text{
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;    
+      height: 100%;
+      width: 100%;      
+      background: rgba(30, 30, 30,0.57);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-content: space-around;
+      font-size: 80%;
+      text-align: left;
+      .sku {
+        font-size: 80%;
+        color:#aaa;
+      }
+      .author{
+        margin-bottom: 0;
+        margin-top: auto;
+        font-weight: 600;
+        font-size: 80%;
+      }
+    }
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;    
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+
+  }
 
   .video-thumbnail{
     width: 100%;

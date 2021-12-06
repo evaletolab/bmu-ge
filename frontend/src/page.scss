@@ -10,6 +10,35 @@
   transition: all .3s;
 }
 
+/* ---------- Grid ---------- */
+
+.grid-container {
+  display: grid;
+}
+
+.grid-container--fit {
+  /* note to self, auto-fit - auto-fill */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.grid-element {
+  background-color: grey;
+  padding: 20px;
+  margin: 2px;
+  color: #fff;
+  border-radius: 8px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;  
+}
+
+/* typo */
+.day-title {
+  margin: 0 0 0.5em 1em;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
 /* --------- Menu bar --------- */
 
 
