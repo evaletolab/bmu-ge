@@ -8,7 +8,7 @@
           <div class="menubar-leftbutton"><div class="label">-</div></div>
           <div class="menubar-centerarea">
             <!-- <img class="contain" src="/images/logo-150ans-blanc-sm.png" height=100% width="100%"> -->
-            BMU
+            <div>{{title}}</div>
             </div>
 
           <div class="menubar-rightbutton" @click="openPage = true"><div class="label" >=</div></div>
@@ -20,15 +20,20 @@
 <div class="content-wrapper">
 
       <!-- Content goes here. -->
-      <div class="title">{{title}}</div>
+      <div class="title hide"></div>
 
         <div class="render-area shade">
           <div class="grid-container grid-container--fit">
             <div class="grid-element content" v-for="(book) in books"  :key="book.localNumber">
-              <img class="" :src="book.image" />
-              <div class="text">
+              <div class="image-content">
+                <img class="" :src="book.image" />
+              </div>
+              <div class="fav">
+                <i class="fas fa-heart pink" />
+              </div>
+              <div class="text">                
                 <div class="hide">{{book.title}}</div>
-                <div class="sku">{{book.localNumber}}</div>
+                <div class="sku hide">{{book.localNumber}}</div>
                 <div class="author">{{book.creator}}</div>
               </div>
             </div>
@@ -154,7 +159,7 @@ export default class Home extends Vue {
 
   async onCategory(name) {
     try{
-      console.log('-----',name)
+      this.openPage = false;
       this.books = await $bmu.queryNews(name);
       this.title = name;
 
@@ -173,15 +178,35 @@ export default class Home extends Vue {
   }
 
   .content{
+      position: relative;
+    .image-content{
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      background: gray;      
+      img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+      }
+    }
+    .fav {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: hotpink;
+    }
+
     .text{
       position: absolute;
-      top: 0;
-      left: 0;
+      bottom: -25px;
+      left: 5px;
       z-index: 1;    
-      height: 100%;
       width: 100%;      
-      background: rgba(30, 30, 30,0.37);
-      padding: 10px;
+      padding: 0px;
       display: flex;
       flex-direction: column;
       align-content: space-around;
@@ -198,17 +223,6 @@ export default class Home extends Vue {
         font-size: 80%;
       }
     }
-    img{
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;    
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      object-position: 50% 50%;
-    }
-
   }
 
   .video-thumbnail{
