@@ -20,39 +20,15 @@
         </div>
 
 
+        <slot/>
 
-        <a href="https://www.twitter.com">
-          <div class="ui-button height3 width8 menu"> 
-            <p class="vcenter">Historique</p> 
-            <div class="ui-icon vcenter align-right">
-              <img src="icons/dot.svg" alt="">
-            </div>
-          </div>
-        </a>
 
-        <a href="https://www.twitter.com">
-          <div class="ui-button height3 width8 menu"> 
-            <p class="vcenter">Tutorial</p> 
-            <div class="ui-icon vcenter align-right">
-              <img src="icons/dot.svg" alt="">
-            </div>
-          </div>
-        </a>
-
-        <a href="https://www.twitter.com">
-          <div class="ui-button height3 width8 menu"> 
-            <p class="vcenter">Contact</p> 
-            <div class="ui-icon vcenter align-right">
-              <img src="icons/dot.svg" alt="">
-            </div>
-          </div>
-        </a>
 
     <div class="separator"></div>
 
     <br>
 
-        <a href="mailto:elvis@mappingfestival.com">
+        <a href="mailto:elvis@pouet.com">
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">À propos</p> 
           </div>
@@ -68,7 +44,7 @@
           </div>
         </a>
 
-        <a href="https://www.instagram.com/mappingfestival">
+        <a href="https://www.instagram.com/pouet">
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">Instagram</p> 
             <div class="ui-icon vcenter small align-right">
@@ -77,7 +53,7 @@
           </div>
         </a>
 
-        <a href="https://vimeo.com/mappingfestival">
+        <a href="https://vimeo.com/pouet">
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">Twitter</p> 
             <div class="ui-icon vcenter small align-right">
@@ -90,7 +66,6 @@
 <!----------- END Menu content ---------------->
 <!--------------------------------------------->
 
-        <slot/>
 
 
 

@@ -93,12 +93,14 @@ class BMUService {
             const result = await axios.post('/api/index.php',buildQuery(query),{headers});
             const solr = result.data;	
             const resultSet = solr.resultSet;
-            console.log('---- hits',solr.numHits);
-            console.log('---- page',solr.pageNo);
+            // console.log('---- hits',solr.numHits);
+            // console.log('---- page',solr.pageNo);
             if(solr.numHits > 0) {
                 // console.log('---- content',JSON.stringify(resultSet[0],0,2));
                 for (let index in resultSet) {
                     const img = resultSet[index].imageSource_256 || resultSet[index].imageSource_128;
+                    const imgLoader = new Image();
+                    imgLoader.src = imgSrc+fieldExist(img);
                     const elem: any = {
                         title:(fieldExist(resultSet[index].title)),
                         localNumber:fieldExist(resultSet[index].LocalNumber),

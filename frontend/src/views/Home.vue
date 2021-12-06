@@ -7,7 +7,8 @@
         <div class="menubar-wrapper">
           <div class="menubar-leftbutton"><div class="label">-</div></div>
           <div class="menubar-centerarea">
-            <img class="contain" src="/images/logo-150ans-blanc-sm.png" height=100% width="100%">
+            <!-- <img class="contain" src="/images/logo-150ans-blanc-sm.png" height=100% width="100%"> -->
+            BMU
             </div>
 
           <div class="menubar-rightbutton" @click="openPage = true"><div class="label" >=</div></div>
@@ -19,14 +20,14 @@
 <div class="content-wrapper">
 
       <!-- Content goes here. -->
-      <div class="title">Nouveautés BD</div>
+      <div class="title">{{title}}</div>
 
         <div class="render-area shade">
           <div class="grid-container grid-container--fit">
             <div class="grid-element content" v-for="(book) in books"  :key="book.localNumber">
               <img class="" :src="book.image" />
               <div class="text">
-                <div>{{book.title}}</div>
+                <div class="hide">{{book.title}}</div>
                 <div class="sku">{{book.localNumber}}</div>
                 <div class="author">{{book.creator}}</div>
               </div>
@@ -63,7 +64,26 @@
     </nav> -->
 
     <PageSlide title="Plus d'information" :open="openPage" @onClose="openPage = false" >
-      <div class="-page-header" v-html="content"></div>
+      <div class="page-header">
+          <a href="#" v-for="(category) in categories"  :key="category" @click="onCategory(category)">
+            <div class="ui-button height3 width8 menu"> 
+              <p class="vcenter">{{category}}</p> 
+              <div class="ui-icon vcenter align-right">
+                <img src="icons/dot.svg" alt="">
+              </div>
+            </div>
+          </a>
+
+        <a href="https://www.twitter.com">
+          <div class="ui-button height3 width8 menu"> 
+            <p class="vcenter">Favoris</p> 
+            <div class="ui-icon vcenter align-right">
+              <img src="icons/dot.svg" alt="">
+            </div>
+          </div>
+        </a>
+
+      </div>
     </PageSlide>
 
 
@@ -107,16 +127,20 @@ export default class Home extends Vue {
   // html pages -
   content:any = {}
   books: any[]|undefined = [];
+  title = "bande dessinée";
+
+  categories:string[] = [];
 
   async mounted() {
     this.drawer = this.$refs.drawer as Drawer;
     console.log('-----DEBUG',$config.config)
     this.content = $config.config.content || '';
 
+    this.categories = Object.keys($config.config.queries);
 
     try{
       const uid = $config.getDeviceID();
-      this.books = await $bmu.queryNews('bd');
+      this.books = await $bmu.queryNews('bande dessinée');
 
 
     }catch(err) {
@@ -128,10 +152,25 @@ export default class Home extends Vue {
   onClose() {
   }
 
+  async onCategory(name) {
+    try{
+      console.log('-----',name)
+      this.books = await $bmu.queryNews(name);
+      this.title = name;
+
+    }catch(err) {
+      console.log("reports error:", err);
+    }
+
+  }
 
 }
 </script>
 <style scoped lang="scss">
+
+  .title {
+  background-color: rgb(0 0 0 / 61%);    
+  }
 
   .content{
     .text{
@@ -141,7 +180,7 @@ export default class Home extends Vue {
       z-index: 1;    
       height: 100%;
       width: 100%;      
-      background: rgba(30, 30, 30,0.57);
+      background: rgba(30, 30, 30,0.37);
       padding: 10px;
       display: flex;
       flex-direction: column;

@@ -8,13 +8,13 @@
 
     <div class="main">
       <!-- DESTOP -->
-      <section class="qrcode ">
+      <!-- <section class="qrcode ">
         <img src="/images/qr-code.png" />
-      </section>
+      </section> -->
 
       <!-- WELCOME -->
       <section class="continue">
-        <img src="/images/logo-150ans-blanc.png" />
+        <img src="https://catalogue-bm.geneve.ch/in/rest/annotationSVC/Attachment/attach_cmsUpload_03f62061-c26f-467c-8627-93a727ddb0d7" />
         <div>
         </div>
 
@@ -122,8 +122,8 @@ export default class Landing extends Vue {
 
     //
     // preload building
-    const loader = new Image();
-    loader.src = "/images/building/building_complete_sm.png";
+    // const loader = new Image();
+    // loader.src = "/images/building/building_complete_sm.png";
 
     setTimeout(()=>{
       this.$router.push({path:'/home' }).catch(()=>{});
