@@ -265,8 +265,9 @@ export default class Home extends Vue {
   }
 
   a .active {
-    color: var(--ui-hover-text-color);
-    background: var(--main-font-color);
+    color: black;
+    background: rgb(238 238 238 / 23%);
+
   }
 
   .video-thumbnail{

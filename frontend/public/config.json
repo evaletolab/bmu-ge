@@ -1,10 +1,10 @@
 {
     "apiBaseUrl": "http://localhost:3000",
     "category": [
-        {"name":"Bande dessinée", "slug":"bd"},
-        {"name":"Jeux vidéo", "slug":"jeux-video"},
         {"name":"Romans adulte", "slug":"romans-adulte"},
-        {"name":"Romans jeunesse", "slug":"romans-jeunesse"}
+        {"name":"Romans jeunesse", "slug":"romans-jeunesse"},
+        {"name":"Bande dessinée", "slug":"bd"},
+        {"name":"Jeux vidéo", "slug":"jeux-video"}
     ],
     "section":{
         "bd":"+ZMAT:BookBD", 
