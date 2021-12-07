@@ -11,29 +11,6 @@ const headers = {
     'X-Proxy-URL' : url
 };
 
-const querySolr_ = {
-  "searchType": "all",
-	"fl":"title,LocalNumber,imageSource_256,meta",
-  "sf": "* NOT (TypeOfDocumentFacet:Event AND (start_date:[* TO NOW] OR end_date:[* TO NOW]))",
-  "queryid": "NONE",
-  "query":"__NAME__",
-  "advancedQuery": {
-    "searchContext": "advancedsearch",
-    "terms": [],
-    "limitClause": "LocalisationLimit_s:\"Cite\" contentLimit_s:\"__SECTION__\"",
-    "searchType": "all",
-    "pageSize": 100000,
-    "sort": "SortkeyYOPD_DESC",
-    "section": "* NOT (TypeOfDocumentFacet:Event AND (start_date:[* TO NOW] OR end_date:[* TO NOW]))"
-  },
-  "order": "SortkeyYOPD_DESC",
-  "pageNo": 1,
-  "pageSize": 100,
-  "locale": "fr",
-  "includeFacets": false
-};
-
-const limitClause = "LocalisationLimit_s:\"Cite\" contentLimit_s:\"__SECTION__\"";
 const querySolr = {
     "searchType": "all",
     "fl":"title,LocalNumber,imageSource_256,meta",
@@ -142,7 +119,7 @@ class BMUService {
             // console.log('---- page',solr.pageNo);
             if(solr.numHits > 0) {
                 for (let index in resultSet) {
-                    const img = resultSet[index].imageSource_128 || resultSet[index].imageSource_256;
+                    const img = resultSet[index].imageSource_256 || resultSet[index].imageSource_128;
                     const imgLoader = new Image();
                     imgLoader.src = imgSrc+fieldExist(img);
                     const elem: any = {

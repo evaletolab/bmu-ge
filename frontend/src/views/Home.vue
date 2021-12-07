@@ -19,7 +19,7 @@
 
   <div class="content-wrapper">
     <div class="header shade">
-      <input type="text" :placeholder="'Recherche dans : '+title" @keyup.enter="onEnter" />
+      <input v-model="inputSeach" type="text" :placeholder="'Recherche dans : '+title" @keyup.enter="onEnter" />
     </div>
 
       <!-- Content goes here. -->
@@ -131,6 +131,7 @@ export default class Home extends Vue {
 
   categories:any[] = [];
   currentSlug = 'bd';
+  inputSeach = '';
 
 
   async mounted() {
@@ -180,6 +181,7 @@ export default class Home extends Vue {
   @Watch('$route', { immediate: true, deep: true })
   async onUrlChange(value: any) {
     this.currentSlug = (value.params.slug)?value.params.slug:'bd';
+    this.inputSeach = '';
     await this.onCategory(this.currentSlug);
   }  
 
@@ -189,8 +191,8 @@ export default class Home extends Vue {
 
   .header {
     overflow: hidden;
-    height: var(--nav-header-height);
-    min-height: var(--nav-header-height);
+    height: 100px;
+    min-height: 100px;
     position: relative;
     width: 100%;
     flex: 100%;
@@ -202,14 +204,15 @@ export default class Home extends Vue {
     input{
       width: 80%;
       height: 50px;
-      border: 1px solid #aaa;
-      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       padding: 2px 17px;
       font-size: 20px;
       line-height: 24px;
       margin: auto;
       outline: 0;
-      background-color: rgb(255 255 255 / 62%);
+      background-color: rgba(255, 255, 255, 0.12);
+      font-weight: 600;
+      color: #fff;
     }
   }
 
