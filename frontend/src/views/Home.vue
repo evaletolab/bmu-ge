@@ -27,11 +27,11 @@
         <div class="render-area shade">
           <div class="grid-container grid-container--fit">
             <div class="grid-element content" v-for="(book) in books"  :key="book.localNumber">
-              <div class="image-content">
+              <div class="image-content" @click="onFavorite(book)">
                 <img class="" :src="book.image" />
               </div>
               <div class="fav">
-                <i class="fas fa-heart pink" />
+                <i class="fas fa-heart " :class="{'pink':(favorites[book.localNumber])}" />
               </div>
               <div class="text">                
                 <div class="hide">{{book.title}}</div>
@@ -74,14 +74,14 @@
             </div>
           </router-link>
 
-        <a href="https://www.twitter.com">
+        <router-link to="/home/favorites" >
           <div class="ui-button height3 width8 menu"> 
             <p class="vcenter">Favoris</p> 
             <div class="ui-icon vcenter align-right">
               <img src="/icons/dot.svg" alt="">
             </div>
           </div>
-        </a>
+        </router-link>
 
       </div>
     </PageSlide>
@@ -133,6 +133,10 @@ export default class Home extends Vue {
   currentSlug = 'bd';
   inputSeach = '';
 
+  //
+  // favorite
+  favorites:any = {};
+
 
   async mounted() {
     this.drawer = this.$refs.drawer as Drawer;
@@ -143,8 +147,8 @@ export default class Home extends Vue {
 
     try{
       const uid = $config.getDeviceID();
-      this.books = await $bmu.queryNews('bande dessinée');
 
+      this.favorites = $config.getStorage('BMG_FAVORITE') || {};
 
     }catch(err) {
       console.log("reports error:", err);
@@ -157,8 +161,14 @@ export default class Home extends Vue {
   }
 
   async onCategory(slug) {
-    try{
+    try{      
       this.openPage = false;
+      if(this.currentSlug == 'favorites') {
+        this.favorites = $config.getStorage('BMG_FAVORITE') || {};
+        this.books = Object.values(this.favorites);
+        return;
+      }
+
       this.books = await $bmu.queryNews(slug);
       this.title = this.categories.find(cat => cat.slug === slug).name;
 
@@ -168,10 +178,15 @@ export default class Home extends Vue {
 
   }
 
+  async onFavorite(book) {
+    const copy = JSON.parse(JSON.stringify(book));
+    this.favorites[book.localNumber] = (this.favorites[book.localNumber])? undefined: copy;
+    $config.setStorage('BMG_FAVORITE',this.favorites);
+  }
+
   async onEnter($event) {
     // $event.key, $event.keyCode,$event.target.value);
     const query = $event.target.value;
-    console.log('-----',query,query.length)
     if([null,''].indexOf(query) > -1 || query.length < 4) {
       return;
     }
@@ -265,6 +280,10 @@ export default class Home extends Vue {
         font-size: 80%;
       }
     }
+  }
+
+  .pink{
+    color: deeppink;
   }
 
   a .active {
