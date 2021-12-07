@@ -1,26 +1,28 @@
 <template>
   <!-- <div class="home"> -->
-      <div class="page-wrap">
-        <div class="page-main">
+    <div class="page-wrap">
+      <div class="page-main">
 
-    <!-- TOOLBAR -->
-        <div class="menubar-wrapper">
-          <div class="menubar-leftbutton"><div class="label">-</div></div>
-          <div class="menubar-centerarea">
-            <!-- <img class="contain" src="/images/logo-150ans-blanc-sm.png" height=100% width="100%"> -->
-            <div>{{title}}</div>
-            </div>
+      <!-- TOOLBAR -->
+      <div class="menubar-wrapper ">
+        <div class="menubar-leftbutton"><div class="label">-</div></div>
+        <div class="menubar-centerarea">
+          <!-- <img class="contain" src="/images/logo-150ans-blanc-sm.png" height=100% width="100%"> -->
+          </div>
 
-          <div class="menubar-rightbutton" @click="openPage = true"><div class="label" >=</div></div>
-        </div>
+        <div class="menubar-rightbutton" @click="openPage = true"><div class="label" >=</div></div>
+      </div>
+
 
 
   <!-- Content ******** template dimitri -->
 
-<div class="content-wrapper">
+  <div class="content-wrapper">
+    <div class="header shade">
+      <input type="text" :placeholder="'Recherche dans : '+title" @keyup.enter="onEnter" />
+    </div>
 
       <!-- Content goes here. -->
-      <div class="title hide"></div>
 
         <div class="render-area shade">
           <div class="grid-container grid-container--fit">
@@ -39,13 +41,6 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
 </div>
 
   <!-- Content ******** template dimitri -->
@@ -172,23 +167,57 @@ export default class Home extends Vue {
 
   }
 
-   @Watch('$route', { immediate: true, deep: true })
-   async onUrlChange(value: any) {
-     this.currentSlug = (value.params.slug)?value.params.slug:'bd';
+  async onEnter($event) {
+    // $event.key, $event.keyCode,$event.target.value);
+    const query = $event.target.value;
+    console.log('-----',query,query.length)
+    if([null,''].indexOf(query) > -1 || query.length < 4) {
+      return;
+    }
+    this.books = await $bmu.search(this.currentSlug,query);
+  }
 
-     await this.onCategory(this.currentSlug);
-    }  
+  @Watch('$route', { immediate: true, deep: true })
+  async onUrlChange(value: any) {
+    this.currentSlug = (value.params.slug)?value.params.slug:'bd';
+    await this.onCategory(this.currentSlug);
+  }  
 
 }
 </script>
 <style scoped lang="scss">
+
+  .header {
+    overflow: hidden;
+    height: var(--nav-header-height);
+    min-height: var(--nav-header-height);
+    position: relative;
+    width: 100%;
+    flex: 100%;
+    display: flex;
+    margin: 0;
+    h1{
+      
+    }
+    input{
+      width: 80%;
+      height: 50px;
+      border: 1px solid #aaa;
+      border-radius: 28px;
+      padding: 2px 17px;
+      font-size: 20px;
+      line-height: 24px;
+      margin: auto;
+      outline: 0;
+      background-color: rgb(255 255 255 / 62%);
+    }
+  }
 
   .title {
   background-color: rgb(0 0 0 / 61%);    
   }
 
   .content{
-      position: relative;
     .image-content{
       border-radius: 8px;
       overflow: hidden;
@@ -251,8 +280,11 @@ export default class Home extends Vue {
     height: 64px;
   }
 
-  .render-area{
+  .content-wrapper{
     overflow-y: auto;
+    @media (orientation: landscape) {
+      flex-wrap: wrap;      
+    }
   }
 
   .vertical-drawer{
