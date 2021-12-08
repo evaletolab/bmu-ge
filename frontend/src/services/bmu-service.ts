@@ -11,6 +11,18 @@ const headers = {
     'X-Proxy-URL' : url
 };
 
+const queryBlog = {
+    "queryid": "N-9820c681-bd6a-4c43-b2f3-955a6aea92e6",
+    "query": [
+        "profile:ac2e579e-41bc-462b-92f8-8f445025a8fc"
+    ],
+    "includeFacets": true,
+    "sf": "*",
+    "order": "start_sort_DESC",
+    "pageSize": 20,
+    "locale": "fr"
+};
+
 const querySolr = {
     "searchType": "all",
     "fl":"title,LocalNumber,imageSource_256,meta",
@@ -73,7 +85,32 @@ const fieldExist = (field) => {
 class BMUService {
 
 
-    async getLoan() {
+    async getBlog() {
+        const content:any[] = []
+        try{
+            const result = await axios.post('/api/index.php',queryBlog,{headers});
+            const solr = result.data;	
+            const resultSet = solr.resultSet || [];
+            // console.log('----',resultSet[0])
+            for (let index in resultSet) {
+                const img = resultSet[index].imageSource_256 || resultSet[index].imageSource_128;
+                const imgLoader = new Image();
+                imgLoader.src = imgSrc+fieldExist(img);
+                // meta.auteurs
+                // meta.category
+                // id, https://catalogue-bm.geneve.ch/notice?id=h%3A%3A71c15133-4a6b-442d-8531-56c1f5a80123&queryId=N-9820c681-bd6a-4c43-b2f3-955a6aea92e6&posInSet=2
+                const elem: any = {
+                    title:(fieldExist(resultSet[index].title)),
+                    image:imgSrc+fieldExist(img)
+                };
+                content.push(elem);
+            }                
+
+            return content;
+        }catch(err) {
+            console.log('---- error',err);
+        };    
+        return [];
     }
 
     async search(section, query) {
