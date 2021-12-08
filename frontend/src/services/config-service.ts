@@ -81,8 +81,25 @@ class ConfigService {
   async get(force?: boolean){
     if(!this._store.config.done && !force) {
       const res = await axios.get(this._baseUrl + 'config.json',defaultAxios);
-      this._store.config = res.data;
+      const config = this._store.config = res.data;
       this._store.config.done = true;
+
+      const now = Date.now();
+      //
+      // update date fields
+      // StockDateAdded_date => 2021-09-05T00:00:00.000Z  (3 months)
+      const start = new Date(now - (3600000 * 24 * 100)).toISOString();
+      //
+      // DateOfPublicationSearch_date => 2019-12-05T00:00:00.000Z (24 months)
+      const end = new Date(now - (3600000 * 24 * 354)).toISOString();
+
+      const queries = Object.keys(config.queries);
+      Object.keys(config.queries).forEach( key => {
+        config.queries[key] = config.queries[key].replaceAll('__START__',start);
+        config.queries[key] = config.queries[key].replaceAll('__END__',end);
+      })
+
+      
 
       // console.log('---DBG', JSON.stringify(this._store,null,2))
       //
