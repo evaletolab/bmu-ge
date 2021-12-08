@@ -18,7 +18,7 @@
 
 
 
-  @import url('https://rsms.me/inter/inter.css');
+  /* @import url('https://rsms.me/inter/inter.css'); */
 
 
 
@@ -44,12 +44,12 @@
   --helper-color-alpha: 00;
 
   /* font basics settings*/
-  --font-size-max: 22px;
+  --font-size-max: 18px;
   --font-size: min(calc((1vmin + 1.5vmax) * .7), var(--font-size-max));
   --line-height: calc(var(--font-size) * 1.26);
   --font-color: rgb(255, 255, 255);
-  --main-font-color: black;
-  --body-color: white;
+  --main-font-color: white;
+  --body-color: black;
   --nav-header-height: 230px;
 
  

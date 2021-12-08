@@ -27,11 +27,11 @@
         <div class="render-area shade">
           <div class="grid-container grid-container--fit">
             <div class="grid-element content" v-for="(book) in books"  :key="book.localNumber">
-              <div class="image-content" @click="onFavorite(book)">
+              <div class="image-content" >
                 <img class="" :src="book.image" />
               </div>
-              <div class="fav">
-                <i class="fas fa-heart " :class="{'pink':(favorites[book.localNumber])}" />
+              <div class="fav" @click="onFavorite($event,book)">
+                  <i class="fas fa-heart " :class="{'pink':(isFavorite(book))}" />
               </div>
               <div class="text">                
                 <div class="hide">{{book.title}}</div>
@@ -137,6 +137,9 @@ export default class Home extends Vue {
   // favorite
   favorites:any = {};
 
+  isFavorite(book) {
+    return !!this.favorites[book.localNumber];
+  }
 
   async mounted() {
     this.drawer = this.$refs.drawer as Drawer;
@@ -147,9 +150,7 @@ export default class Home extends Vue {
 
     try{
       const uid = $config.getDeviceID();
-
       this.favorites = $config.getStorage('BMG_FAVORITE') || {};
-
     }catch(err) {
       console.log("reports error:", err);
     }
@@ -178,10 +179,16 @@ export default class Home extends Vue {
 
   }
 
-  async onFavorite(book) {
+  async onFavorite($event, book) {
+    // $event.target.classList.add("circle-ripple");
     const copy = JSON.parse(JSON.stringify(book));
     this.favorites[book.localNumber] = (this.favorites[book.localNumber])? undefined: copy;
     $config.setStorage('BMG_FAVORITE',this.favorites);
+    this.$forceUpdate();
+    // setTimeout(()=>{
+    //   $event.target.classList.remove("circle-ripple");
+
+    // },1000);
   }
 
   async onEnter($event) {
@@ -190,12 +197,22 @@ export default class Home extends Vue {
     if([null,''].indexOf(query) > -1 || query.length < 4) {
       return;
     }
-    this.books = await $bmu.search(this.currentSlug,query);
+    this.$router.push({path:'/home/'+this.currentSlug+'/'+query });
   }
 
   @Watch('$route', { immediate: true, deep: true })
   async onUrlChange(value: any) {
-    this.currentSlug = (value.params.slug)?value.params.slug:'bd';
+    if(!value.params.slug){
+      return this.$router.push({path:'/home/bd' });
+    }
+    this.currentSlug = value.params.slug;
+
+    if(value.params.search) {
+      this.inputSeach = value.params.search;
+      this.books = await $bmu.search(this.currentSlug, value.params.search);
+      return;
+    }
+
     this.inputSeach = '';
     await this.onCategory(this.currentSlug);
   }  
@@ -316,5 +333,27 @@ export default class Home extends Vue {
     overflow: auto;
   }
 
+  .circle-ripple {
+    background-color: deeppink;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    animation: ripple 0.2s linear infinite;
+  }
+  $color : deeppink; 
+  @keyframes ripple {
+    0% {
+      box-shadow: 0 0 0 0 rgba($color, 0.3),
+                  0 0 0 1em rgba($color, 0.3),
+                  0 0 0 3em rgba($color, 0.3),
+                  0 0 0 5em rgba($color, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 0 1em rgba($color, 0.3),
+                  0 0 0 3em rgba($color, 0.3),
+                  0 0 0 5em rgba($color, 0.3),
+                  0 0 0 8em rgba($color, 0);
+    }
+  }
 
 </style>

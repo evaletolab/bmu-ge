@@ -12,7 +12,7 @@ const routes: Array<RouteConfig> = [
     component: Landing
   },
   {
-    path: '/home/:slug?',
+    path: '/home/:slug?/:search?',
     name: 'Home',
     component: Home
   },

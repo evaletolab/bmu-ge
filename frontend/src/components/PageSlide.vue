@@ -87,8 +87,8 @@
 <style lang="scss" scoped>
    
     .page{
+      width: var(--sidebar-width);
       position: fixed;
-      width: 300px;
       height: 100%;
       top: 0;
       /* box-shadow: 20px 0px 16px -1px rgb(255 255 255 / 40%); */
@@ -165,6 +165,7 @@
     // min-height: 10%;
     margin-top: calc(var(--margin)*2);
     margin-bottom: calc(var(--margin)*2);
+    background-color: black;
   }
     
     .btn {
