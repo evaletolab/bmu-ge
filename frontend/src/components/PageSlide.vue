@@ -24,18 +24,18 @@
 
 
 
-    <div class="separator"></div>
+        <div class="separator"></div>
 
-    <br>
+        <br>
 
-        <a href="mailto:elvis@pouet.com">
+        <a href="http://institutions.ville-geneve.ch/fr/bm/">
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">À propos</p> 
           </div>
         </a>
 
 
-        <a href="https://www.facebook.com/mappingfest">
+        <a href="https://www.facebook.com/genevebm">
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">Facebook</p> 
             <div class="ui-icon vcenter small align-right">
@@ -53,9 +53,9 @@
           </div>
         </a>
 
-        <a href="https://vimeo.com/pouet">
+        <a href="https://github.com/evaletolab/bmu-ge" class="hide">
           <div class="ui-button height2 width8 menu noborder">  
-            <p class="vcenter small">Twitter</p> 
+            <p class="vcenter small">Github</p> 
             <div class="ui-icon vcenter small align-right">
               <img src="/icons/social_vimeo.svg" alt="">
             </div>
@@ -97,6 +97,9 @@
       z-index: 40;
       margin: 0;
       padding: var(--margin);
+      @media (max-width:430px) {
+        width: 90vw;
+      }
     }
 
     .page.open{
