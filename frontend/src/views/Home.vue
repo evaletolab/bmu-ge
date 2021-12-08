@@ -36,7 +36,9 @@
               <div class="text">                
                 <div class="hide">{{book.title}}</div>
                 <div class="sku hide">{{book.localNumber}}</div>
-                <div class="author">{{book.creator}}</div>
+                <div class="author">
+                    {{book.creator}}<br/>
+                    <span class="sku">{{book.localNumber}}</span></div>
               </div>
             </div>
           </div>
@@ -73,6 +75,15 @@
               </div>
             </div>
           </router-link>
+
+        <router-link to="/blog" >
+          <div class="ui-button height3 width8 menu" > 
+            <p class="vcenter">Blog</p> 
+            <div class="ui-icon vcenter align-right">
+              <img src="/icons/dot.svg" alt="">
+            </div>
+          </div>
+        </router-link>
 
         <router-link to="/home/favorites" >
           <div class="ui-button height3 width8 menu"> 
@@ -276,7 +287,7 @@ export default class Home extends Vue {
 
     .text{
       position: absolute;
-      bottom: -25px;
+      bottom: -38px;
       left: 5px;
       z-index: 1;    
       width: 100%;      
@@ -294,7 +305,19 @@ export default class Home extends Vue {
         margin-bottom: 0;
         margin-top: auto;
         font-weight: 600;
-        font-size: 80%;
+        font-size: 15px;
+        line-height: 17px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+        @media (max-width:430px) {
+          font-size: 15px;
+          line-height: 14px;          
+        }
+        .sku{
+          color:#aaa;          
+        }
       }
     }
   }
