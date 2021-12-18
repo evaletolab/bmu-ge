@@ -186,7 +186,7 @@ export default class Home extends Vue {
 
       this.books = await $bmu.queryNews(slug);
       if(!this.books.length) {
-        this.search.focus();
+        this.$nextTick(() => this.search.focus());
       }
       this.title = this.categories.find(cat => cat.slug === slug).name;
 
@@ -228,10 +228,9 @@ export default class Home extends Vue {
       this.inputSeach = value.params.search;
       this.books = await $bmu.search(this.currentSlug, value.params.search);
       if(!this.books.length) {
-        this.search.focus();
-        //    this.$nextTick(() => this.searchBoard.focus())
+        this.$nextTick(() => this.search.focus());
       } else {
-        this.search.blur();
+        this.$nextTick(() => this.search.blur());
       }
 
       return;
