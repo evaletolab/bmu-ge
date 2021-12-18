@@ -10,7 +10,8 @@
           <!-- <img class="contain" src="/images/logo-150ans-blanc-sm.png" height=100% width="100%"> -->
           </div>
 
-        <div class="menubar-rightbutton" @click="openPage = true"><div class="label" >=</div></div>
+        <div class="menubar-rightbutton" @click="openPage = true"><div class="label" >
+          <i class="fas fa-bars"/></div></div>
       </div>
 
 
@@ -19,7 +20,7 @@
 
   <div class="content-wrapper">
     <div class="header shade">
-      <input v-model="inputSeach" type="text" :placeholder="'Recherche dans : '+title" @keyup.enter="onEnter" />
+      <input v-model="inputSeach" ref="search" type="text" :placeholder="'Recherche dans : '+title" @keyup.enter="onEnter" />
     </div>
 
       <!-- Content goes here. -->
@@ -115,7 +116,7 @@
 
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Component, Prop, Ref, Vue, Watch } from 'vue-property-decorator';
 import Drawer from '../components/Drawer.vue';
 import PageSlide from '../components/PageSlide.vue';
 import VerticalDrawer from '../components/VerticalDrawer.vue';
@@ -133,6 +134,8 @@ export default class Home extends Vue {
   drawer:any|Drawer;
 
   showVideoDrawer = false;
+
+  @Ref() readonly search!: HTMLInputElement
 
   //
   // html pages -
@@ -182,6 +185,9 @@ export default class Home extends Vue {
       }
 
       this.books = await $bmu.queryNews(slug);
+      if(!this.books.length) {
+        this.search.focus();
+      }
       this.title = this.categories.find(cat => cat.slug === slug).name;
 
     }catch(err) {
@@ -221,6 +227,13 @@ export default class Home extends Vue {
     if(value.params.search) {
       this.inputSeach = value.params.search;
       this.books = await $bmu.search(this.currentSlug, value.params.search);
+      if(!this.books.length) {
+        this.search.focus();
+        //    this.$nextTick(() => this.searchBoard.focus())
+      } else {
+        this.search.blur();
+      }
+
       return;
     }
 
@@ -234,8 +247,8 @@ export default class Home extends Vue {
 
   .header {
     overflow: hidden;
-    height: 100px;
-    min-height: 100px;
+    height: 70px;
+    min-height: 70px;
     position: relative;
     width: 100%;
     flex: 100%;
@@ -245,17 +258,19 @@ export default class Home extends Vue {
       
     }
     input{
-      width: 80%;
-      height: 50px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      width: 100%;
+      height: 55px;
+      border: 0px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       padding: 2px 17px;
-      font-size: 20px;
-      line-height: 24px;
+      font-size: 24px;
+      line-height: 27px;
       margin: auto;
       outline: 0;
-      background-color: rgba(255, 255, 255, 0.12);
+      background-color: rgba(255, 255, 255, 0.06);
       font-weight: 600;
       color: #fff;
+      margin-bottom: 0;
     }
   }
 

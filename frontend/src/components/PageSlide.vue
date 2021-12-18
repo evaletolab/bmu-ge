@@ -44,7 +44,7 @@
           </div>
         </a>
 
-        <a href="https://www.instagram.com/pouet">
+        <a href="https://www.instagram.com/pouet" class="hide">
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">Instagram</p> 
             <div class="ui-icon vcenter small align-right">
@@ -53,7 +53,7 @@
           </div>
         </a>
 
-        <a href="https://github.com/evaletolab/bmu-ge" class="hide">
+        <a href="https://github.com/evaletolab/bmu-ge" class="">
           <div class="ui-button height2 width8 menu noborder">  
             <p class="vcenter small">Github</p> 
             <div class="ui-icon vcenter small align-right">

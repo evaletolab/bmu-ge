@@ -44,21 +44,21 @@
   height: var(--menubar-height);
   width: 100%;
   margin-left: 0;
-  background-color: hsla(220, 40%, 33%, .5);
+  background-color: hsla(220, 40%, 33%, .0);
   display: flex;
 }
 
 .menubar-leftbutton {
   height: var(--menubar-height);
   width: var(--menubar-height);
-  background-color: hsla(0, 100%, 100%, 0.05); /* delete! */
+  background-color: hsla(0, 100%, 100%, 0.00); /* delete! */
   order: 1;
 }
 
 .menubar-centerarea {
   height: var(--menubar-height);
   width: var(--menubar-height);
-  background-color: hsla(0, 100%, 100%, 0.15); /* delete! */ 
+  background-color: hsla(0, 100%, 100%, 0.0); /* delete! */ 
   order: 2;
   flex-grow: 8;
 }

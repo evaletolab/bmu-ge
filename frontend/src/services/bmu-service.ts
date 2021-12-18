@@ -141,6 +141,7 @@ class BMUService {
             return content;
         }catch(err) {
             console.log('---- error',err);
+            return content;
         };    
     }
 
@@ -171,6 +172,7 @@ class BMUService {
             return content;
         }catch(err) {
             console.log('---- error',err);
+            return [];
         };    
     }
 }
